@@ -23,9 +23,9 @@ namespace evomethods
             return temp;
         }
 
+        // Однопозиционный кроссовер
         public static string[] Crossover(string[] rbcvalues, int position)
         {
-            // Classic Crossover
             string rbcvalue1 = rbcvalues[0], rbcvalue2 = rbcvalues[1];
             string temp1 = rbcvalue1.Substring(0, position);
             string temp2 = rbcvalue2.Substring(0, position);
@@ -34,9 +34,9 @@ namespace evomethods
             return new string[] { temp1, temp2 };
         }
 
+        // Многопозиционный кроссовер
         public static string[] Crossover(string[] rbcvalues, int[] position)
         {
-            // Multipositional Crossover
             string rbc1 = rbcvalues[0], rbc2 = rbcvalues[1];
             string temp1 = rbc2.Substring(0, position[0] - 1);
             string temp2 = rbc1.Substring(0, position[0] - 1);
@@ -54,9 +54,9 @@ namespace evomethods
             return new string[] { temp1, temp2 };
         }
 
+        // Гладкий кроссовер
         public static string Crossover(string[] rbcvalues, double threshhold)
         {
-            // Smooth Crossover
             string output = "";
             for (int i = 0; i < rbcvalues[0].Length; i++)
             {

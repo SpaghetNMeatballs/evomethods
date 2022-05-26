@@ -45,6 +45,30 @@ namespace evomethods
             return new string(array);
         }
 
+        private static int[] Shuffle(int[] array)
+        {
+            int n = array.Length;
+            while (n > 1)
+            {
+                n--;
+                int k = rand.Next(n + 1);
+                var value = array[k];
+                array[k] = array[n];
+                array[n] = value;
+            }
+            return array;
+        }
+
+        private static int[] GenerateCrossoverPool(int size)
+        {
+            int[] output = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                output[i] = i;
+            }
+            return Shuffle(output);
+        }
+
         private static string RandomBinary(int length)
         {
             string output = "";
@@ -102,5 +126,6 @@ namespace evomethods
             Array.Sort(output);
             return output;
         }
+
     }
 }
