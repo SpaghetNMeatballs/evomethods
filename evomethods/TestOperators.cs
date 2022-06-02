@@ -10,8 +10,8 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 1);
-            Population testone = new Population(inp0, 1);
+            Population test = new Population(inp0, 1, RanaFitness);
+            Population testone = new Population(inp0, 1, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -20,7 +20,7 @@ namespace evomethods
                 }
                 string rbctemp = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 double start = test.curPop[0].fitness;
                 int[] fullIndex = getIndex(test.fragmentSize * 5, 7);
                 int[] oneIndex = getIndex(test.fragmentSize, 7);
@@ -28,10 +28,10 @@ namespace evomethods
                 oneIndex[0] *= segment + 1;
                 oneIndex[1] *= segment + 1;
                 test.curPop[0].rbcvalue = Translocate(rbctemp, fullIndex);
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
 
                 testone.curPop[0].rbcvalue = Translocate(rbctemp, oneIndex);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
 
                 if (start > test.curPop[0].fitness)
                 {
@@ -54,8 +54,8 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 1);
-            Population testone = new Population(inp0, 1);
+            Population test = new Population(inp0, 1, RanaFitness);
+            Population testone = new Population(inp0, 1, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -64,17 +64,17 @@ namespace evomethods
                 }
                 string rbctemp1 = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp1;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 double startFit = test.curPop[0].fitness;
                 int fullIndex = rand.Next(test.fragmentSize * 5);
                 int oneIndex = rand.Next(test.fragmentSize);
                 int segment = rand.Next(5);
 
                 test.curPop[0].rbcvalue = Inversion(rbctemp1, fullIndex);
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
 
                 testone.curPop[0].rbcvalue = SetSegment(rbctemp1, Inversion(GetSegment(rbctemp1, segment), oneIndex), segment);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
 
                 if (startFit > test.curPop[0].fitness)
                 {
@@ -97,8 +97,8 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 2);
-            Population testone = new Population(inp0, 2);
+            Population test = new Population(inp0, 2, RanaFitness);
+            Population testone = new Population(inp0, 2, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -109,7 +109,7 @@ namespace evomethods
                 string rbctemp2 = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp1;
                 test.curPop[1].rbcvalue = rbctemp2;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 int start = 0;
                 if (test.curPop[start].fitness > test.curPop[Math.Abs(start - 1)].fitness)
                 {
@@ -123,7 +123,7 @@ namespace evomethods
                 string[] tempSmall = Crossover(new string[] { GetSegment(rbctemp1, segment), GetSegment(rbctemp2, segment) }, oneIndex);
                 test.curPop[0].rbcvalue = temp[0];
                 test.curPop[1].rbcvalue = temp[1];
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 int end = 0;
                 if (test.curPop[end].fitness > test.curPop[Math.Abs(end - 1)].fitness)
                 {
@@ -133,7 +133,7 @@ namespace evomethods
 
                 testone.curPop[0].rbcvalue = SetSegment(rbctemp1, tempSmall[0], segment);
                 testone.curPop[1].rbcvalue = SetSegment(rbctemp2, tempSmall[1], segment);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
                 int endOne = 0;
                 if (testone.curPop[endOne].fitness > testone.curPop[Math.Abs(endOne - 1)].fitness)
                 {
@@ -162,8 +162,8 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 2);
-            Population testone = new Population(inp0, 2);
+            Population test = new Population(inp0, 2, RanaFitness);
+            Population testone = new Population(inp0, 2, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -174,7 +174,7 @@ namespace evomethods
                 string rbctemp2 = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp1;
                 test.curPop[1].rbcvalue = rbctemp2;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 int start = 0;
                 if (test.curPop[start].fitness > test.curPop[Math.Abs(start - 1)].fitness)
                 {
@@ -190,7 +190,7 @@ namespace evomethods
 
                 test.curPop[0].rbcvalue = temp[0];
                 test.curPop[1].rbcvalue = temp[1];
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 int end = 0;
                 if (test.curPop[end].fitness > test.curPop[Math.Abs(end - 1)].fitness)
                 {
@@ -201,7 +201,7 @@ namespace evomethods
 
                 testone.curPop[0].rbcvalue = SetSegment(rbctemp1, tempSmall[0], segment);
                 testone.curPop[1].rbcvalue = SetSegment(rbctemp2, tempSmall[1], segment);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
                 int endOne = 0;
                 if (testone.curPop[endOne].fitness > testone.curPop[Math.Abs(endOne - 1)].fitness)
                 {
@@ -230,9 +230,9 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 2);
-            Population testfull = new Population(inp0, 2);
-            Population testone = new Population(inp0, 2);
+            Population test = new Population(inp0, 2, RanaFitness);
+            Population testfull = new Population(inp0, 2, RanaFitness);
+            Population testone = new Population(inp0, 2, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -244,7 +244,7 @@ namespace evomethods
                 string rbctemp2 = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp1;
                 test.curPop[1].rbcvalue = rbctemp2;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 // Вычисление лучшей особи перед оператором
                 int start = 0;
                 if (test.curPop[start].fitness < test.curPop[Math.Abs(start - 1)].fitness)
@@ -259,10 +259,10 @@ namespace evomethods
                 double threshold = rand.NextDouble();
                 // Применение оператора на всю гамету
                 testfull.curPop[0].rbcvalue = Crossover(new string[] { rbctemp1, rbctemp2 }, threshold);
-                testfull.fitnessTest(RanaFitness);
+                testfull.fitnessTest();
                 // Применение оператора на переменную
                 testone.curPop[0].rbcvalue = SetSegment(rbctemp1, Crossover(new string[] { GetSegment(rbctemp1, segment), GetSegment(rbctemp2, segment) }, threshold), segment);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
 
                 if (startFit > testfull.curPop[0].fitness)
                 {
@@ -285,9 +285,9 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 2);
-            Population testfull = new Population(inp0, 2);
-            Population testone = new Population(inp0, 2);
+            Population test = new Population(inp0, 2, RanaFitness);
+            Population testfull = new Population(inp0, 2, RanaFitness);
+            Population testone = new Population(inp0, 2, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -299,7 +299,7 @@ namespace evomethods
                 string rbctemp2 = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp1;
                 test.curPop[1].rbcvalue = rbctemp2;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 // Вычисление лучшей особи перед оператором
                 int start = 0;
                 if (test.curPop[start].fitness > test.curPop[Math.Abs(start - 1)].fitness)
@@ -314,10 +314,10 @@ namespace evomethods
                 double threshold = 0.5;
                 // Применение оператора на всю гамету
                 testfull.curPop[0].rbcvalue = Crossover(new string[] { rbctemp1, rbctemp2 }, threshold);
-                testfull.fitnessTest(RanaFitness);
+                testfull.fitnessTest();
                 // Применение оператора на переменную
                 testone.curPop[0].rbcvalue = SetSegment(rbctemp1, Crossover(new string[] { GetSegment(rbctemp1, segment), GetSegment(rbctemp2, segment) }, threshold), segment);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
 
                 if (startFit > testfull.curPop[0].fitness)
                 {
@@ -340,9 +340,9 @@ namespace evomethods
             int fullimprov = 0;
             int oneimprov = 0;
             double[][] inp0 = { interval, interval, interval, interval, interval };
-            Population test = new Population(inp0, 4);
-            Population testfull = new Population(inp0, 4);
-            Population testone = new Population(inp0, 4);
+            Population test = new Population(inp0, 4, RanaFitness);
+            Population testfull = new Population(inp0, 4, RanaFitness);
+            Population testone = new Population(inp0, 4, RanaFitness);
             for (int i = 0; i < size; i++)
             {
                 if (i % (size / 10) == 0)
@@ -354,7 +354,7 @@ namespace evomethods
                 string rbctemp2 = RandomBinary(test.fragmentSize * 5);
                 test.curPop[0].rbcvalue = rbctemp1;
                 test.curPop[1].rbcvalue = rbctemp2;
-                test.fitnessTest(RanaFitness);
+                test.fitnessTest();
                 // Вычисление лучшей особи перед оператором
                 double[] tempFit = { test.curPop[0].fitness, test.curPop[1].fitness, test.curPop[2].fitness, test.curPop[3].fitness };
                 Array.Sort(tempFit);
@@ -366,10 +366,10 @@ namespace evomethods
                 double threshold = 0.5;
                 // Применение оператора на всю гамету
                 testfull.curPop[0].rbcvalue = Crossover(new string[] { rbctemp1, rbctemp2 }, threshold);
-                testfull.fitnessTest(RanaFitness);
+                testfull.fitnessTest();
                 // Применение оператора на переменную
                 testone.curPop[0].rbcvalue = SetSegment(rbctemp1, Crossover(new string[] { GetSegment(rbctemp1, segment), GetSegment(rbctemp2, segment) }, threshold), segment);
-                testone.fitnessTest(RanaFitness);
+                testone.fitnessTest();
 
                 if (startFit > testfull.curPop[0].fitness)
                 {

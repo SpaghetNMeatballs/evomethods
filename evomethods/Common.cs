@@ -29,6 +29,36 @@ namespace evomethods
             return output;
         }
 
+        public static double Rastrigin(double[] x)
+        {
+            double sum = 10 * x.Length;
+            for (int i = 0; i < x.Length; i++)
+            {
+                sum += x[i] * x[i] - 10 * Math.Cos(2 * Math.PI * x[i]);
+            }
+            return sum;
+        }
+
+        public static double Rozenbrok(double[] x)
+        {
+            double sum = 0;
+            for (int i = 0; i < x.Length-1; i++)
+            {
+                sum += 100 * Math.Pow(x[i + 1] - x[i] * x[i], 2) + Math.Pow(x[i] - 1, 2);
+            }
+            return sum;
+        }
+
+        public static double test(double[] x)
+        {
+            double output = 0;
+            for (int i = 1; i < x.Length + 1; i++)
+            {
+                output += Math.Pow(x[i - 1] * x[i - 1] - i, 2);
+            }
+            return output;
+        }
+
         private static string Shuffle(string str)
         {
             char[] array = str.ToCharArray();
@@ -67,6 +97,17 @@ namespace evomethods
                 output[i] = i;
             }
             return Shuffle(output);
+        }
+
+        private static int[] GenerateExchangePool(int size)
+        {
+            int[] output = new int[(int)(size * 0.75)];
+            for (int i = 0; i < (int)(size * 0.75); i++)
+            {
+                output[i] = i + (int)(size * 0.25);
+            }
+
+            return new ArraySegment<int>(Shuffle(output), 0, size/2).ToArray();
         }
 
         private static string RandomBinary(int length)

@@ -23,7 +23,7 @@ namespace evomethods
 
             public int CompareTo(Gamet other)
             {
-                return -fitness.CompareTo(other.fitness);
+                return fitness.CompareTo(other.fitness);
             }
         }
 
@@ -93,13 +93,66 @@ namespace evomethods
             return output;
         }
 
+        public static void DoublePrint(double[] inp)
+        {
+            for (int i = 0; i < inp.Length; i++)
+            {
+                Console.WriteLine("x"+(i+1).ToString()+" = " + String.Format("{0:0.000}", inp[i]));
+            }
+        }
+
+        private static void PerformFull(Population test)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                //Console.WriteLine("Итерация №" + i.ToString());
+                double cur = test.curPop[0].fitness;
+                test.EraFull();
+                test.fitnessTest();
+                double output = test.curPop[0].fitness;
+                Console.Write(output.ToString() + ' ');
+            }
+            //Console.WriteLine("Лучшее значение за весь процесс" + best.ToString());
+            //DoublePrint(test.getValuesFromRbc(bestrbc));
+            //Console.WriteLine("Текущее лучшее " + test.curPop[0].fitness.ToString());
+            double[] toprint = new double[100];
+            for (int i = 0; i < 100; i++)
+            {
+                toprint[i] = test.curPop[i].fitness;
+            }
+            Console.WriteLine('\n');
+            DoublePrint(test.getGametValue(0));
+            //DoublePrint(toprint);
+        }
+        private static void PerformSegment(Population test)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                //Console.WriteLine("Итерация №" + i.ToString());
+                double cur = test.curPop[0].fitness;
+                test.EraSegment();
+                test.fitnessTest();
+                double output = test.curPop[0].fitness;
+                Console.Write(output.ToString() + ' ');
+            }
+            //Console.WriteLine("Текущее лучшее " + test.curPop[0].fitness.ToString());
+            double[] toprint = new double[100];
+            for (int i = 0; i < 100; i++)
+            {
+                toprint[i] = test.curPop[i].fitness;
+            }
+            Console.WriteLine('\n');
+            DoublePrint(test.getGametValue(0));
+            //DoublePrint(toprint);
+        }
+
         static void Main(string[] args)
         {
-            double[] temp = TestCrossover(100000);
-            double temp1 = temp[0];
-            double temp2 = temp[1];
-            Console.WriteLine("Улучшения на всей гамете " + temp1.ToString());
-            Console.WriteLine("Улучшения на одной переменной " + temp2.ToString());
+            double[] p0 = { -5, 5, 0.01 };
+            double[][] p = { p0, p0, p0, p0 };
+            Population test = new Population(p, 10000, Rastrigin);
+            test.fitnessTest();
+            PerformFull(test);
         }
     }
 }
